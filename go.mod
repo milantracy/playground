@@ -1,3 +1,3 @@
 module github.com/milantracy/playground
 
-go 1.21
+go 1.20
