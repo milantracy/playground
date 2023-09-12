@@ -31,4 +31,4 @@ for epoch in range(num_epochs):
         loss.backward()
         optimizer.step()
 
-                       
+torch.save(model.state_dict(), "simplenet.pth")

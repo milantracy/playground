@@ -12,7 +12,7 @@ input_size = 28 * 28
 num_classes = 10
 
 model = SimpleNet(input_size, num_classes)
-model.load_state_dict(torch.load('trained_model.pth'))
+model.load_state_dict(torch.load('simplenet.pth'))
 
 def check_accuracy(loader, model):
     num_correct = 0
