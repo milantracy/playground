@@ -16,3 +16,12 @@ var albums = []ws.Album{
 func GetAlbums(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, albums)
 }
+
+func AddAlbum(c *gin.Context) {
+	var newAlbum ws.Album
+
+	if err := c.BindJSON(&newAlbum); err == nil {
+		albums = append(albums, newAlbum)
+		c.IndentedJSON(http.StatusCreated, newAlbum)
+	}
+}
