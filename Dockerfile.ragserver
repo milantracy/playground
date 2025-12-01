@@ -1,0 +1,34 @@
+# --- STAGE 1: Build the Go application ---
+FROM golang:1.24.10 AS builder
+
+# Set necessary environment variables
+ENV GO111MODULE=on
+
+# Create app directory and copy go.mod and go.sum
+WORKDIR /app
+COPY go.mod go.sum ./
+
+# Download dependencies
+RUN go mod download
+
+# Copy the source code
+COPY pkg/genai/ragserver/ ./pkg/genai/ragserver/
+COPY cmd/genai/ragserver ./cmd/genai/ragserver/
+
+# Build the application
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /bin/ragserver ./cmd/genai/ragserver/
+
+# --- STAGE 2: Create a minimal production image ---
+FROM alpine:latest
+
+# Set the working directory
+WORKDIR /root/
+
+# Copy the built binary from the builder stage
+COPY --from=builder /bin/ragserver .
+
+# Expose the application port (matching the one configured in your Go code)
+EXPOSE 8080
+
+# Command to run the executable
+CMD ["/bin/ragserver"]
