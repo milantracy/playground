@@ -4,8 +4,8 @@ import (
 	"context"
 	"os"
 
-	"github.com/milantracy/playground/cmd/gemini/adk"
-	"github.com/milantracy/playground/pkg/gemini/adk/multitoolagent"
+	"github.com/milantracy/playground/pkg/genai/adk"
+	"github.com/milantracy/playground/pkg/genai/adk/multitoolagent"
 	"google.golang.org/adk/agent"
 	"google.golang.org/adk/agent/llmagent"
 	"google.golang.org/adk/cmd/launcher"
